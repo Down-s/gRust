@@ -67,6 +67,10 @@ net.Receive("gRust.DropItem", function(len, pl)
     local ang = pl:EyeAngles()
 
     local item = quantity == inventory[index]:GetQuantity() and inventory[index] or inventory[index]:Split(quantity)
+    
+    if (item.AmmoType) then
+        item.AmmoType = inventory[index].AmmoType
+    end
 
     local ent = gRust.CreateItemBag(item, pos, ang)
     timer.Simple(0, function()
@@ -75,6 +79,6 @@ net.Receive("gRust.DropItem", function(len, pl)
             phys:SetVelocity(pl:GetAimVector() * 200)
         end
     end)
-    
+
     inventory:Remove(index, quantity)
 end)
