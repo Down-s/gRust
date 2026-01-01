@@ -21,7 +21,7 @@ net.Receive("gRust.Deploy", function(len, pl)
         angOffset = net.ReadAngle()
     end
 
-    local pos, ang, valid, reason, parentEnt = pl:GetBuildTransform(deployable, rotation)
+    local pos, ang, valid, reason, parentEnt, socket = pl:GetBuildTransform(deployable, rotation)
     if (!valid) then
         pl:ChatPrint(reason)
         return
@@ -35,6 +35,12 @@ net.Receive("gRust.Deploy", function(len, pl)
     ent:Spawn()
     ent.Item = item
     ent.OwnerID = pl:SteamID()
+
+    if (IsValid(parentEnt)) then
+        parentEnt:SetNWEntity("OccupiedEntity", ent)
+        parentEnt:DeleteOnRemove(ent)
+    end
+
     if (IsValid(traceEntity) and !IsValid(parentEnt) and !traceEntity:IsWorld()) then
         traceEntity:DeleteOnRemove(ent)
     end
@@ -87,7 +93,7 @@ net.Receive("gRust.Deploy", function(len, pl)
     if (snd and snd != "") then
         ent:EmitSound(snd)
     end
-    
+
     local cback = deployable:GetOnDeployed()
     if (cback) then
         cback(ent, pl, parentEnt, item)
@@ -104,7 +110,7 @@ net.Receive("gRust.Rotate", function(len, pl)
     if (!IsValid(ent)) then return end
     if (!ent.CanRotate) then return end
     if (ent:GetPos():DistToSqr(pl:GetPos()) > 10000) then return end
-    
+
     local rotation = ent.Deploy:GetRotate()
     if (!rotation or rotation == 0) then return end
 

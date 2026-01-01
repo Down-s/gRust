@@ -6,6 +6,9 @@ function gRust.GetClosestSocket(pos, deployable)
     for _, ent in ents.Iterator() do
         if (ent:GetPos():DistToSqr(pos) < MAX_SNAP_DISTANCE) then
             if (!ent.gRust) then continue end
+            if (IsValid(ent:GetNWEntity("OccupiedEntity"))) then
+                continue
+            end
             local sockets = ent.Deploy and ent.Deploy.Sockets or ent.Sockets
             if (!sockets) then continue end
 
@@ -59,9 +62,11 @@ function PLAYER:GetBuildTransform(deployable, rotation)
                 local newAng = ent:LocalToWorldAngles(socket:GetAngle() + v:GetAngleOffset())
 
                 if (!v:CanConnect(socket)) then continue end
-                
+
                 local structureCenter = deployable.Center or vector_origin
                 local checkCenter = newPos + dir:Forward() * structureCenter.x + dir:Right() * structureCenter.y + dir:Up() * structureCenter.z
+
+                if (socket.Occupied) then continue end
 
                 if (socket.CustomCheck) then
                     if (!socket:GetCustomCheck(ent, checkCenter, newAng, tr)) then continue end
@@ -73,7 +78,7 @@ function PLAYER:GetBuildTransform(deployable, rotation)
                     tr = util.TraceLine(tr)
                     if (tr.Hit) then continue end
                 end
-    
+
                 local dist = newPos:DistToSqr(pos)
                 if (dist < closestDist) then
                     closestDist = dist
@@ -82,24 +87,24 @@ function PLAYER:GetBuildTransform(deployable, rotation)
                     closestEnt = ent
                 end
             end
-    
+
             if (closestPos) then
                 closestAng.y = closestAng.y + rotation
                 local validPlacement, checkReason = deployable:GetCustomCheck(closestPos, closestAng, tr)
-                
+
                 if (!self:CanBuild()) then
                     validPlacement = false
                     checkReason = "You cannot build here"
                 end
 
-                return closestPos, closestAng, validPlacement, checkReason, closestEnt
+                return closestPos, closestAng, validPlacement, checkReason, closestEnt, socket
             end
         end
     end
 
     local ang = Angle(0, self:EyeAngles().y + rotation, 0)
     local validPlacement, checkReason
-    
+
     if (!deployable:GetRequireSocket()) then
         if (deployable:HasCustomCheck()) then
             validPlacement, checkReason = deployable:GetCustomCheck(pos, ang, tr)
@@ -112,7 +117,7 @@ function PLAYER:GetBuildTransform(deployable, rotation)
                     ang = tr.HitNormal:Angle() + Angle(90, 0, 0)
                 end
                 ang:RotateAroundAxis(ang:Up(), rotation + (self:EyeAngles().y - tr.Entity:GetAngles().y))
-                
+
                 if (tr.HitNormal.z < 0.7) then
                     validPlacement = false
                     checkReason = "Surface is too steep"
@@ -133,6 +138,6 @@ function PLAYER:GetBuildTransform(deployable, rotation)
         validPlacement = false
         checkReason = "You cannot build here"
     end
-    
+
     return pos, ang, validPlacement, checkReason
 end

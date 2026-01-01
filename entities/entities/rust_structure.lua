@@ -12,7 +12,7 @@ local function FoundationCheck(pos, ang, x, tr)
     tr.endpos = pos - Vector(0, 0, 120)
     tr.filter = pl
     tr = util.TraceLine(tr)
-    
+
     return (tr.Hit and tr.HitTexture == "**displacement**"), "Not in terrain!"
 end
 
@@ -53,7 +53,7 @@ gRust.Structures = {
                 :SetPosition(0, 0, 0)
                 :SetAngle(0, 0, 0)
                 :AddFemaleTag("stairs"),
-                
+
             gRust.CreateSocket()
                 :SetPosition(64.5, 0, -64.5)
                 :SetAngle(0, 0, 0)
@@ -70,8 +70,8 @@ gRust.Structures = {
                 :SetPosition(0, -64.5, -64.5)
                 :SetAngle(0, -90, 0)
                 :AddFemaleTag("raisedfoundation"),
-                
-                
+
+
             gRust.CreateSocket()
                 :SetPosition(64.5, 0, 64.5)
                 :SetAngle(0, 0, 0)
@@ -112,7 +112,7 @@ gRust.Structures = {
                 :AddFemaleTag("foundation")
                 :AddMaleTag("foundation"),
 
-                
+
             gRust.CreateSocket()
                 :SetPosition(0, 32.25, -64.5)
                 :SetAngle(0, 60, 0)
@@ -129,7 +129,7 @@ gRust.Structures = {
                 :AddFemaleTag("foundation")
                 :AddMaleTag("foundation"),
 
-                
+
             gRust.CreateSocket()
                 :SetPosition(0, 32.25, 64.5)
                 :SetAngle(0, 60, 0)
@@ -195,7 +195,7 @@ gRust.Structures = {
                 :SetAngleOffset(0, 0, 0)
                 :AddFemaleTag("window")
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return !IsValid(ent:GetNWEntity("OccupiedEntity"))
                 end),
             gRust.CreateSocket()
                 :SetPosition(0, 0.1, 129)
@@ -233,7 +233,7 @@ gRust.Structures = {
                 :SetAngle(0, 180, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return !IsValid(ent:GetNWEntity("OccupiedEntity"))
                 end)
                 :AddFemaleTag("door"),
             gRust.CreateSocket()
@@ -241,7 +241,7 @@ gRust.Structures = {
                 :SetAngle(0, 0, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return !IsValid(ent:GetNWEntity("OccupiedEntity"))
                 end)
                 :AddFemaleTag("door"),
             gRust.CreateSocket()
@@ -249,7 +249,7 @@ gRust.Structures = {
                 :SetAngle(0, 90, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return !IsValid(ent:GetNWEntity("OccupiedEntity"))
                 end)
                 :AddFemaleTag("vending_machine"),
             gRust.CreateSocket()
@@ -257,7 +257,7 @@ gRust.Structures = {
                 :SetAngle(0, -90, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return !IsValid(ent:GetNWEntity("OccupiedEntity"))
                 end)
                 :AddFemaleTag("vending_machine")
         ),
@@ -278,7 +278,7 @@ gRust.Structures = {
                 :SetAngle(0, 0, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return !IsValid(ent:GetNWEntity("OccupiedEntity"))
                 end)
                 :AddFemaleTag("doubledoor"),
             gRust.CreateSocket()
@@ -286,7 +286,7 @@ gRust.Structures = {
                 :SetAngle(0, 180, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return !IsValid(ent:GetNWEntity("OccupiedEntity"))
                 end)
                 :AddFemaleTag("doubledoor"),
             gRust.CreateSocket()
@@ -471,14 +471,14 @@ function ENT:StructureSetup()
             self:Remove()
             return
         end
-    
+
         self.Upkeep = {
             {
                 Item = "wood",
                 Amount = structure.Cost / 5
             }
         }
-    
+
         self.Decay = 2 * 60*60 -- 2 hours
     end
 end
@@ -489,7 +489,7 @@ function ENT:Initialize()
             self:PhysicsInitStatic(SOLID_VPHYSICS)
             self:SetMoveType(MOVETYPE_NONE)
             self:SetSolid(SOLID_VPHYSICS)
-            
+
             if (string.find(self:GetModel(), "twig")) then
                 self:SetMaxHP(10)
                 self:SetHP(10)
@@ -507,7 +507,7 @@ function ENT:SetupSockets()
     if (!structure) then return end
     local sockets = structure.Sockets
     for i = 1, #sockets do
-        self:AddSocket(sockets[i])
+        self:AddSocket(sockets[i]:Copy())
     end
 end
 
@@ -585,7 +585,7 @@ function ENT:OnTakeDamage(dmg)
         local dir = (dmgPos - center):GetNormalized()
         local weakSide = self:LocalToWorldAngles(weakSide:Angle()):Forward()
         local isWeakSide = dir:Dot(weakSide) > 0
-    
+
         if (isWeakSide) then
             damageScale = damageScale * 2
         end
@@ -606,10 +606,10 @@ end
 function ENT:Save(buffer)
     BaseClass.Save(self, buffer)
     buffer:WriteString(self:GetModel())
-    
+
     buffer:WriteFloat(self:GetHP())
     buffer:WriteFloat(self:GetMaxHP())
-    
+
     buffer:WriteByte(self:GetUpgradeLevel())
 
     buffer:WriteByte(#self.Upkeep)
@@ -626,7 +626,7 @@ function ENT:Load(buffer)
 
     self:SetHP(buffer:ReadFloat())
     self:SetMaxHP(buffer:ReadFloat())
-    
+
     self:StructureSetup()
     self:SetUpgradeLevel(buffer:ReadByte())
 
