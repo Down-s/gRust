@@ -1,0 +1,112 @@
+//
+// gRust gamemode FGD
+//
+
+@include "base.fgd" 
+
+@BaseClass color(225 0 0) base(Targetname, Angles, Shadow) = gRustItem
+[
+	output OnPlayerTouch(void) : "Fires when the player touches this object"
+]
+
+@PointClass base(gRustItem) studio("models/environment/crates/crate.mdl") = rust_crate : "Loot Crate" []
+@PointClass base(gRustItem) studio("models/environment/crates/crate2.mdl") = rust_militarycrate : "Military Crate" []
+@PointClass base(gRustItem) studio("models/environment/crates/locked_crate.mdl") = rust_lockedcrate : "Locked Crate" []
+@PointClass base(gRustItem) studio("models/environment/crates/rationbox.mdl") = rust_rationbox : "Ration Box" []
+@PointClass base(gRustItem) studio("models/environment/crates/primitive_toolbox.mdl") = rust_primitivetoolbox : "Primitive Toolbox" []
+@PointClass base(gRustItem) studio("models/environment/crates/toolbox.mdl") = rust_toolbox : "Toolbox" []
+@PointClass base(gRustItem) studio("models/environment/misc/recycler.mdl") = rust_recycler : "Recycler" []
+@PointClass base(gRustItem) studio("models/deployable/rusttv.mdl") = rust_tv : "YouTube TV" []
+@PointClass base(gRustItem) studio("models/deployable/chair.mdl") = rust_chair : "Chair" []
+@PointClass base(gRustItem) studio("models/deployable/piano.mdl") = rust_piano : "Piano" []
+@PointClass base(gRustItem) studio("models/environment/misc/barrel_v2.mdl") = rust_barrel : "Barrel" []
+@PointClass base(gRustItem) studio("models/environment/misc/barrel_v2.mdl") = rust_oilbarrel : "Oil Barrel" []
+@PointClass base(gRustItem) studio("models/deployable/repair_bench.mdl") = rust_repairbench : "Repair Bench" []
+@PointClass base(gRustItem) studio("models/deployable/research_table.mdl") = rust_researchtable : "Research Table" []
+@PointClass base(gRustItem) studio("models/environment/junkpiles/g.mdl") = rust_junkpile : "Junkpile" []
+@PointClass base(gRustItem) studio("models/environment/spinner_wheel_casino.mdl") = rust_casinowheel : "Casino Wheel" []
+@PointClass base(gRustItem) studio("models/environment/dropbox.mdl") = rust_casinobox : "Casino Box" []
+@PointClass base(gRustItem) studio("models/deployable/chair.mdl") = rust_chair : "Chair" []
+@PointClass base(gRustItem) studio("models/deployable/sentry_base.mdl") = rust_sentry : "Sentry" []
+@PointClass base(gRustItem) studio("models/environment/roadsigns/roadsign_a.mdl") = rust_roadsign : "Road Sign" []
+@PointClass base(gRustItem) studio("models/environment/crates/elite_crate.mdl") = rust_elitecrate : "Elite Crate" []
+@PointClass base(gRustItem) studio("models/darky_m/rust/shopfront.mdl") = rust_metalshopfront : "Metal Shop Front" []
+@PointClass base(gRustItem) studio("models/player/gman_high.mdl") = rust_airwolfvendor : "Airwolf Vendor" []
+@PointClass base(gRustItem) studio("models/deployable/workbench_tier1.mdl") = rust_tier1 : "Tier 1 Workbench" []
+@PointClass base(gRustItem) studio("models/deployable/workbench_tier2.mdl") = rust_tier2 : "Tier 2 Workbench" []
+@PointClass base(gRustItem) studio("models/deployable/workbench_tier3.mdl") = rust_tier3 : "Tier 3 Workbench" []
+@PointClass base(gRustItem) studio("models/darky_m/rust/puzzle/access_card.mdl") = rust_accesscard : "Access Card"
+[
+	level(integer) : "0" : 0 : "The keycard required to activate this reader (0 = Green, 1 = Blue, 2 = Red)"
+]
+
+@PointClass base(gRustItem) studio("models/player/darky_m/rust/scientist.mdl") = rust_scientist : "Scientist" []
+
+@PointClass base(gRustItem) studio("models/environment/doors/industrial_door_a.mdl") = rust_door : "Door"
+[
+	model(string) : "World Model"
+]
+
+@PointClass base(gRustItem) studio("models/darky_m/rust/puzzle/button.mdl") = rust_button : "Button"
+[
+	id(string) : "ID" : "Identifier to link with other entities"
+]
+
+@PointClass base(gRustItem) studio("models/darky_m/rust/puzzle/fusebox.mdl") = rust_fusebox : "Fuse Box"
+[
+	id(string) : "ID" : "Identifier to link with other entities"
+]
+
+@PointClass base(gRustItem) studio("models/darky_m/rust/puzzle/door.mdl") = rust_puzzledoor : "Puzzle Door"
+[
+	id(string) : "ID" : "Identifier to link with other entities"
+]
+
+@PointClass base(gRustItem) studio("models/darky_m/rust/puzzle/card_reader.mdl") = rust_cardreader : "Card Reader"
+[
+	id(string) : "ID" : "Identifier to link with other entities"
+	level(integer) : "Level" : 0 : "The keycard required to activate this reader (0 = Green, 1 = Blue, 2 = Red)"
+]
+
+@PointClass base(gRustItem) color(255 0 0) = rust_itemspawn : "An entity to spawn an item at"
+[
+	item(string) : "Item ID" : "wood" : "The Item ID to spawn"
+	respawntime(integer) : "Respawn Time" : 0 : "The amount of time between respawns (0 for never)"
+]
+
+@SolidClass base(Trigger, Targetname) iconsprite("editor/obsolete.vmt") = rust_nobuildzone :
+	"A trigger volume that doesn't allow building in the area."
+[
+    
+]
+
+@SolidClass base(Trigger, Targetname) iconsprite("editor/obsolete.vmt") = rust_radzone :
+	"A trigger volume that applies radiation to players inside the volume."
+[
+    
+]
+
+@SolidClass base(Trigger, Targetname) iconsprite("editor/obsolete.vmt") = rust_safezone :
+	"A trigger volume that disallows players from taking damage."
+[
+    
+]
+
+@PointClass base(gRustItem) studio("models/deployable/vending_machine.mdl") = rust_vendingmachine :
+	"Vending Machine"
+[
+	item1(string) : "Item 1" : "" : "The Item ID that is being sold"
+	cost1(string) : "Cost 1" : 0 : "The cost of the item"
+	item2(string) : "Item 2" : "" : "The Item ID that is being sold"
+	cost2(string) : "Cost 2" : 0 : "The cost of the item"
+	item3(string) : "Item 3" : "" : "The Item ID that is being sold"
+	cost3(string) : "Cost 3" : 0 : "The cost of the item"
+	item4(string) : "Item 4" : "" : "The Item ID that is being sold"
+	cost4(string) : "Cost 4" : 0 : "The cost of the item"
+	item5(string) : "Item 5" : "" : "The Item ID that is being sold"
+	cost5(string) : "Cost 5" : 0 : "The cost of the item"
+	item6(string) : "Item 6" : "" : "The Item ID that is being sold"
+	cost6(string) : "Cost 6" : 0 : "The cost of the item"
+	item7(string) : "Item 7" : "" : "The Item ID that is being sold"
+	cost7(string) : "Cost 7" : 0 : "The cost of the item"
+]

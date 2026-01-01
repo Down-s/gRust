@@ -1,0 +1,71 @@
+-- gRust.ItemRegister("test_generator")
+-- :SetName("Test Generator")
+-- :SetEntity("rust_testgenerator")
+-- :SetDescription("A test generator.")
+-- :SetStack(1)
+-- :SetCondition(true)
+-- :SetIcon("materials/items/electrical/test_generator.png")
+-- :SetMaterial("Metal")
+-- :AddToCategory("Electrical")
+-- :SetRecipe(
+--     "hq_metal", 26,
+--     "gears", 4,
+--     "metal_pipe", 2,
+--     "fuse", 4
+-- )
+-- :Register()
+
+-- gRust.ItemRegister("small_rechargeable_battery")
+-- :SetName("Small Rechargeable Battery")
+-- :SetEntity("rust_smallbattery")
+-- :SetDescription("A small rechargable battery. Must have a minimum charge of 5 seconds to discharge. Can be wired in series. Charging rate is dependant on power in, with a maximum of 80% efficiency.")
+-- :SetStack(1)
+-- :SetCondition(true)
+-- :SetIcon("materials/items/electrical/small_battery.png")
+-- :SetMaterial("Metal")
+-- :AddToCategory("Electrical")
+-- :SetRecipe(
+--     "hq_metal", 5
+-- )
+-- :SetCraftable(true)
+-- :SetCraftTime(30)
+-- :SetResearchCost(20)
+-- :SetTier(1)
+-- :Register()
+
+-- gRust.ItemRegister("switch")
+-- :SetName("Switch")
+-- :SetEntity("rust_switch")
+-- :SetDescription("A simple electric switch.")
+-- :SetStack(1)
+-- :SetCondition(true)
+-- :SetIcon("materials/items/electrical/switch.png")
+-- :SetMaterial("Metal")
+-- :AddToCategory("Electrical")
+-- :SetRecipe(
+--     "metal_fragments", 100
+-- )
+-- :SetCraftable(true)
+-- :SetCraftTime(30)
+-- :SetResearchCost(20)
+-- :SetTier(1)
+-- :Register()
+
+-- gRust.ItemRegister("large_solar_panel")
+-- :SetName("Large Solar Panel")
+-- :SetEntity("rust_solarpanel")
+-- :SetDescription("A solar panel which converts sunlight into energy. The amount of energy generated is dependent on the sun's intensity and angle to the panel.")
+-- :SetStack(1)
+-- :SetCondition(true)
+-- :SetIcon("materials/items/electrical/solar_panel.png")
+-- :SetMaterial("Metal")
+-- :AddToCategory("Electrical")
+-- :SetRecipe(
+--     "hq_metal", 5,
+--     "tech_trash", 1
+-- )
+-- :SetCraftable(true)
+-- :SetCraftTime(30)
+-- :SetResearchCost(75)
+-- :SetTier(1)
+-- :Register()

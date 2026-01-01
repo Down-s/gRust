@@ -1,0 +1,8 @@
+"rust"
+{
+    "base"          "base"
+    "title"         "Rust"
+    "maps"          "^rust_"
+    "category"      "pvp"
+    "menusystem"    "1"
+}

@@ -1,0 +1,11 @@
+*
+
+!entities/
+!entities/**
+!gamemode/
+!gamemode/**
+!rust.txt
+!grust.fgd
+!.gitignore
+!README.md
+!LICENSE
