@@ -41,12 +41,32 @@ end
 
 function ENT:Save(buffer)
     BaseClass.Save(self, buffer)
-    
+
     buffer:WriteString(self:GetBagName())
 end
 
 function ENT:Load(buffer)
     BaseClass.Load(self, buffer)
-    
+
     self:SetBagName(buffer:ReadString())
+end
+
+function ENT:Interact(pl)
+    if (CLIENT) then
+        gRust.OpenSleepingBagRename(self)
+    end
+end
+
+if (SERVER) then
+    util.AddNetworkString("gRust.RenameSleepingBag")
+    net.Receive("gRust.RenameSleepingBag", function(len, pl)
+        local ent = net.ReadEntity()
+        local newName = net.ReadString()
+
+        if (!IsValid(ent) or !ent.SleepingBag) then return end
+        if (ent.OwnerID ~= pl:SteamID()) then return end
+        if (string.len(newName) > 32) then return end
+
+        ent:SetBagName(newName)
+    end)
 end
