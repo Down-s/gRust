@@ -9,7 +9,7 @@ To keep the code consistent, please follow the guidelines below where possible:
 - Function names should use `PascalCase`
 - File globals that are mutable should use `PascalCase`
 - Scoped local variables and arguments should use `camelCase`
-- Globals (including file globals) should use all uppercase names
+- Global constants (including file global constants) should be entirely uppercase with underscores for separation
 - Global functions should be avoided, prefer local functions.
 If you need a global function, put it in the `gRust` table
 - `pl` should be used in place of `ply` for variables that refer to a player
