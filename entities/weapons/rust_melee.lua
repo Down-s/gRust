@@ -35,21 +35,16 @@ SWEP.PrimaryAttacks = {
 
 SWEP.HoldType       = "melee2"
 
--- Setup
-
 function SWEP:SetupDataTables()
-    --BaseClass.SetupDataTables(self)
-    self:NetworkVar("Float", 0, "NextAttack")
-    self:NetworkVar("Float", 1, "NextThrow")
+    BaseClass.SetupDataTables(self)
 end
-
--- Weapon
 
 function SWEP:Deploy()
     self:SendWeaponAnim(ACT_VM_DEPLOY)
     self:SetNextPrimaryFire(CurTime() + self:SequenceDuration())
     self:SetNextAttack(0)
     self:SetNextThrow(0)
+    self.m_AttackBlockTime = 0
     self:SetHoldType(self.HoldType)
     self.Thrown = false
     self.IsThrowing = false
@@ -92,6 +87,10 @@ function SWEP:PrimaryAttack()
     
     local pl = self:GetOwner()
 
+    if self.m_AttackBlockTime and self.m_AttackBlockTime > CurTime() then
+        return
+    end
+
     if (self.IsThrowing) then
         if (self:GetNextThrow() == 0) then
             self:SetNextThrow(CurTime() + 0.275)
@@ -100,6 +99,10 @@ function SWEP:PrimaryAttack()
     	    pl:DoAnimationEvent(ACT_GMOD_GESTURE_ITEM_THROW)
         end
         
+        return
+    end
+
+    if self:GetNextAttack() > CurTime() then
         return
     end
 
@@ -141,17 +144,6 @@ function SWEP:Hit(tr)
 		self:LoseCondition(0.005)
 		self:GetOwner().Belt:SyncSlot(self:GetBeltIndex())
     end
-
-    -- local pos1 = tr.HitPos + tr.HitNormal
-    -- local pos2 = tr.HitPos - tr.HitNormal
-
-    -- local effectdata = EffectData()
-    -- effectdata:SetEntity(ent)
-    -- effectdata:SetOrigin(tr.HitPos)
-    -- effectdata:SetStart(pos1)
-    -- effectdata:SetNormal(tr.HitNormal)
-    -- effectdata:SetScale(1)
-    -- util.Effect("Impact", effectdata)
 end
 
 function SWEP:CheckThrow()
@@ -163,6 +155,7 @@ function SWEP:CheckThrow()
             self.IsThrowing = true
             self:SendWeaponAnim(ACT_VM_PULLPIN)
             self:SetNextPrimaryFire(CurTime() + self:SequenceDuration())
+            self.m_AttackBlockTime = CurTime() + 1.0
             self:SetHoldType("melee")
         end
     else
@@ -184,7 +177,6 @@ end
 function SWEP:Think()
     BaseClass.Think(self)
 
-    -- No need for prediction in singleplayer
     if (game.SinglePlayer() and CLIENT) then return end
     
     self:CheckThrow()
@@ -192,6 +184,10 @@ function SWEP:Think()
     local pl = self:GetOwner()
     if (!IsValid(pl)) then return end
     if (!IsValid(self:GetItem())) then return end
+    
+    if self.m_AttackBlockTime and self.m_AttackBlockTime > CurTime() then
+        return
+    end
     
     local nextAttack = self:GetNextAttack()
     if (nextAttack == 0 or nextAttack > CurTime()) then return end
@@ -206,4 +202,8 @@ function SWEP:Think()
 
     pl:HaltSprint(0.6)
     self:SetNextAttack(0)
+end
+
+function SWEP:SecondaryAttack()
+    return false
 end
