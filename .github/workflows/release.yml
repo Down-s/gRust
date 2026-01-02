@@ -1,9 +1,8 @@
-name: Release Server Files
+name: Server Files
 
 on:
   push:
-    tags:
-      - "v*"
+    tags: ["v*"]
   workflow_dispatch:
 
 jobs:
@@ -13,29 +12,22 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Archive server files
-        run: zip -r server-files.zip gamemode entities rust.txt
-
-      - name: Determine Tag
-        id: tag_logic
+      - uses: actions/checkout@v4
+      - run: zip -r server-files.zip gamemode entities rust.txt
+      - id: meta
         run: |
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            echo "TAG_NAME=manual-build" >> $GITHUB_ENV
-            echo "PRERELEASE=true" >> $GITHUB_ENV
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=manual-build" >> "$GITHUB_OUTPUT"
+            echo "pre=true" >> "$GITHUB_OUTPUT"
           else
-            echo "TAG_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
-            echo "PRERELEASE=false" >> $GITHUB_ENV
+            echo "tag=${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+            echo "pre=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create or Update Release
-        uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v2
         with:
           files: server-files.zip
-          tag_name: ${{ env.TAG_NAME }}
-          name: Release ${{ env.TAG_NAME }}
-          prerelease: ${{ env.PRERELEASE }}
-          draft: false
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: Release ${{ steps.meta.outputs.tag }}
+          prerelease: ${{ steps.meta.outputs.pre }}
           make_latest: ${{ github.event_name != 'workflow_dispatch' }}
