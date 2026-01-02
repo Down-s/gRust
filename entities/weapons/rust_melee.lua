@@ -162,14 +162,13 @@ function SWEP:CheckThrow()
         if (!self.IsThrowing and !self.Thrown and nextAttack == 0) then
             self.IsThrowing = true
             self:SendWeaponAnim(ACT_VM_PULLPIN)
-            self:SetNextPrimaryFire(CurTime() + self:SequenceDuration())
             self:SetHoldType("melee")
         end
     else
         if (self.IsThrowing) then
             self.IsThrowing = false
             self:SendWeaponAnim(ACT_VM_SECONDARYATTACK)
-            self:SetNextPrimaryFire(CurTime() + self:SequenceDuration())
+            self:SetNextPrimaryFire(math.max(CurTime() + self:SequenceDuration(), self:GetNextPrimaryFire()))
             self:SetHoldType(self.HoldType)
         end
 
