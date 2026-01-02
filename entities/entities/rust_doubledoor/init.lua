@@ -48,20 +48,19 @@ function ENT:Initialize()
     RightDoor:SetMaxHP(self.MaxHP)
     RightDoor:SetHP(self.MaxHP)
 
-    local CanTakeDamage = true
+    local LastDamageFrame = -1
     local function OnTakeDamage(me, dmg)
-        if (!CanTakeDamage) then return end
-
+        -- Prevent double damage, there's probably a better way to do this
+        if (LastDamageFrame == FrameNumber()) then return end
+        LastDamageFrame = FrameNumber()
+        
         local parent = me:GetParent()
         if (IsValid(parent)) then
             parent:TakeDamageInfo(dmg)
-    
+
             me:SetHP(parent:GetHP())
             me.OtherDoor:SetHP(parent:GetHP())
         end
-
-        CanTakeDamage = false
-        timer.Simple(0, function() CanTakeDamage = true end)
     end
 
     LeftDoor.OtherDoor = RightDoor
@@ -71,11 +70,11 @@ function ENT:Initialize()
 
     RightDoor:SetLinkedDoor(LeftDoor)
 
-    self:DeleteOnRemove(LeftDoor)
-    self:DeleteOnRemove(RightDoor)
-    
     LeftDoor:DeleteOnRemove(self)
     RightDoor:DeleteOnRemove(self)
+    
+    LeftDoor:SetParent(self)
+    RightDoor:SetParent(self)
 
     LeftDoor.CanOpen = function(me, ...)
         return RightDoor:CanOpen(...)

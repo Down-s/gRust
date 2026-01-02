@@ -31,7 +31,7 @@ end
 util.AddNetworkString("gRust.SyncSleepingBags")
 function PLAYER:LoadSleepingBags()
     self.SleepingBags = self.SleepingBags or {}
-    
+
     for _, ent in ents.Iterator() do
         if (ent.SleepingBag and ent.OwnerID == self:SteamID()) then
             table.insert(self.SleepingBags, ent:EntIndex())
@@ -45,6 +45,18 @@ function PLAYER:LoadSleepingBags()
     end
     net.Send(self)
 end
+
+util.AddNetworkString("gRust.RenameSleepingBag")
+net.Receive("gRust.RenameSleepingBag", function(len, pl)
+    local ent = net.ReadEntity()
+    local newName = net.ReadString()
+
+    if (!IsValid(ent) or !ent.SleepingBag) then return end
+    if (ent.OwnerID != pl:SteamID()) then return end
+    if (string.len(newName) > 32) then return end
+
+    ent:SetBagName(newName)
+end)
 
 util.AddNetworkString("gRust.BagRespawn")
 net.Receive("gRust.BagRespawn", function(len, pl)
