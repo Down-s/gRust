@@ -195,7 +195,7 @@ gRust.Structures = {
                 :SetAngleOffset(0, 0, 0)
                 :AddFemaleTag("window")
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return #ent:GetChildren() == 0
                 end),
             gRust.CreateSocket()
                 :SetPosition(0, 0.1, 129)
@@ -233,7 +233,7 @@ gRust.Structures = {
                 :SetAngle(0, 180, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return #ent:GetChildren() == 0
                 end)
                 :AddFemaleTag("door"),
             gRust.CreateSocket()
@@ -241,7 +241,7 @@ gRust.Structures = {
                 :SetAngle(0, 0, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return #ent:GetChildren() == 0
                 end)
                 :AddFemaleTag("door"),
             gRust.CreateSocket()
@@ -249,7 +249,7 @@ gRust.Structures = {
                 :SetAngle(0, 90, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return #ent:GetChildren() == 0
                 end)
                 :AddFemaleTag("vending_machine"),
             gRust.CreateSocket()
@@ -257,7 +257,7 @@ gRust.Structures = {
                 :SetAngle(0, -90, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return #ent:GetChildren() == 0
                 end)
                 :AddFemaleTag("vending_machine")
         ),
@@ -278,7 +278,7 @@ gRust.Structures = {
                 :SetAngle(0, 0, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return #ent:GetChildren() == 0
                 end)
                 :AddFemaleTag("doubledoor"),
             gRust.CreateSocket()
@@ -286,7 +286,7 @@ gRust.Structures = {
                 :SetAngle(0, 180, 0)
                 :SetAngleOffset(0, 0, 0)
                 :SetCustomCheck(function(ent, pos, ang)
-                    return !IsValid(ent.OccupiedEntity)
+                    return #ent:GetChildren() == 0
                 end)
                 :AddFemaleTag("doubledoor"),
             gRust.CreateSocket()
