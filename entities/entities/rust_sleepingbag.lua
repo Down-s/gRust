@@ -41,12 +41,18 @@ end
 
 function ENT:Save(buffer)
     BaseClass.Save(self, buffer)
-    
+
     buffer:WriteString(self:GetBagName())
 end
 
 function ENT:Load(buffer)
     BaseClass.Load(self, buffer)
-    
+
     self:SetBagName(buffer:ReadString())
+end
+
+function ENT:Interact(pl)
+    if (CLIENT) then
+        gRust.OpenSleepingBagRename(self)
+    end
 end

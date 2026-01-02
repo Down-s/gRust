@@ -6,6 +6,10 @@ be sure follow the guidelines in this document.
 # Code Style
 
 To keep the code consistent, please follow the guidelines below where possible:
+- If statements should use parentheses around the condition `if (condition) then`
+- Parentheses should not be padded with spaces
+- `!` should be used in place of `not` and `~`
+- `||` and `&&` should be avoided, use `or` and `and` instead
 - Function names should use `PascalCase`
 - File globals that are mutable should use `PascalCase`
 - Scoped local variables and arguments should use `camelCase`
@@ -15,7 +19,7 @@ If you need a global function, put it in the `gRust` table
 - `pl` should be used in place of `ply` for variables that refer to a player
 
 If you want a reference point for how code should look in this repository,
-[freelook_cl.lua](../../gamemode/core/player/freelook_cl.lua) is a good example
+[freelook_cl.lua](gamemode/core/player/freelook_cl.lua) is a good example
 
 # Bug Fixes
 
