@@ -1,45 +1,38 @@
 name: Release Server Files
 
 on:
-  # 1. Срабатывает, когда вы пушите тег, начинающийся с 'v' (например, v1.0, v2.3.5)
   push:
     tags:
       - "v*"
-  # 2. Позволяет запустить сборку вручную через кнопку "Run workflow" во вкладке Actions
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    # Разрешаем action-у создавать релизы и загружать файлы
     permissions:
       contents: write
 
     steps:
-      # Шаг 1: Скачиваем код из репозитория
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Шаг 2: Упаковываем нужные файлы и папки в ZIP
-      # Флаг -r означает рекурсивно (для папок)
       - name: Archive files
         run: |
-          zip -r server-files.zip gamemodes entities rust.txt
+          zip -r gamemode entities rust.txt
 
-      # Шаг 3: Создаем релиз и загружаем туда архив
       - name: Create Release and Upload Asset
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/') # Выполнять только если это тег
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: server-files.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # (Опционально) Если запущен вручную — загружаем архив как "Артефакт", чтобы можно было скачать без релиза
       - name: Upload Artifact (Manual Run)
         if: github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
           name: server-files-manual
           path: server-files.zip
+
