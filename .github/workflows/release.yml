@@ -19,7 +19,7 @@ jobs:
 
       - name: Archive files
         run: |
-          zip -r gamemode entities rust.txt
+          zip -r server-files.zip gamemode entities rust.txt
 
       - name: Create Release and Upload Asset
         uses: softprops/action-gh-release@v2
@@ -35,4 +35,3 @@ jobs:
         with:
           name: server-files-manual
           path: server-files.zip
-
