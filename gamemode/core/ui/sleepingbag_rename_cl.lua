@@ -1,6 +1,8 @@
 gRust.RenameSleepingBagMenu = gRust.RenameSleepingBagMenu or {}
 
 local BACKGROUND_COLOR = Color(37, 36, 31, 180)
+local BACKGROUND_MATERIAL = Material("ui/background_linear.png", "noclamp smooth")
+
 function gRust.OpenSleepingBagRename(ent)
     if (!IsValid(ent)) then return end
 
@@ -16,8 +18,12 @@ function gRust.OpenSleepingBagRename(ent)
     panel.Paint = function(me, w, h)
         gRust.DrawPanelBlurred(0, 0, w, h, 4, BACKGROUND_COLOR, me)
 
-        surface.SetDrawColor(0, 0, 0, 200)
-        surface.DrawRect(0, 0, w, h)
+        surface.SetDrawColor(BACKGROUND_COLOR)
+        surface.SetMaterial(BACKGROUND_MATERIAL)
+        surface.DrawTexturedRectUV(0, 0, w, h, 0, 0, w / h, 1)
+
+        surface.SetDrawColor(Color(115, 140, 68, 2))
+        surface.DrawTexturedRectUV(0, 0, w, h, 0, 0, w / h, 1)
     end
 
     local frameWidth = 500 * gRust.Hud.Scaling
