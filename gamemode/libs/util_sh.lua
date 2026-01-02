@@ -1,6 +1,10 @@
 function gRust.BlastDamage(pos, radius, damage, attacker, inflictor)
-    local entities = ents.FindInSphere(pos, radius)
-    for _, ent in ipairs(entities) do
+    local radiusSqr = radius * radius
+
+    for _, ent in ents.Iterator() do
+        local distSqr = ent:GetPos():DistToSqr(pos)
+        if (distSqr > radiusSqr) then continue end
+
         local tr1 = {}
         tr1.start = pos
         tr1.endpos = ent:GetPos()
@@ -20,7 +24,7 @@ function gRust.BlastDamage(pos, radius, damage, attacker, inflictor)
             continue
         end
 
-        local dist = ent:GetPos():Distance(pos)
+        local dist = math.sqrt(distSqr)
         -- Calculate damage, anything within 72 units gets full damage, anything radius units away gets no damage
         local minDist = 72
         local maxDist = radius
