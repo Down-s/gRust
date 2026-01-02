@@ -14,7 +14,7 @@ ENT.Deploy = gRust.CreateDeployable()
             :SetPosition(45, 1.2, 37.5)
             :SetAngle(0, 0, 0)
             :SetCustomCheck(function(ent, pos, ang)
-                return ent:GetBodygroup(2) == 0
+                return ent:GetBodygroup(2) == 0 and not ent:GetNWBool("gRust.NoLock", false)
             end)
             :AddFemaleTag("lock")
     )
