@@ -453,10 +453,14 @@ local function ConstructRightPanel(panel, dontanimate)
     ItemStatsContainer:SetWide(436 * gRust.Hud.Scaling)
     ItemStatsContainer:DockMargin(0, 0, 8 * gRust.Hud.Scaling, 12 * gRust.Hud.Scaling)
 
-    local ItemStats = ItemStatsContainer:Add("gRust.ItemInfo")
-    ItemStats:Dock(BOTTOM)
-    ItemStats:SetTall(264 * gRust.Hud.Scaling)
-    ItemStats:Rebuild()
+    if Item:GetWeapon() and SelectedItem ~= "building_plan" then
+        local ItemInfo = ItemStatsContainer:Add("gRust.ItemInfo")
+        ItemInfo:Dock(TOP)
+        ItemInfo:SetTall(298 * gRust.Hud.Scaling)
+        ItemInfo:DockMargin(0, 4 * gRust.Hud.Scaling, 0, 0)
+        ItemInfo:SetItem(SelectedItem)
+        ItemInfo:Rebuild()
+    end
 
     local DescriptionMargin = 24 * gRust.Hud.Scaling
     local ItemDescription = ItemContainer:Add("gRust.Label")
