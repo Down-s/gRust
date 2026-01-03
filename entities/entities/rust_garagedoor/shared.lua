@@ -29,8 +29,7 @@ ENT.Deploy = gRust.CreateDeployable()
             :AddFemaleTag("lock")
     )
     :SetOnDeployed(function(self, pl, ent)
-        ent:DeleteOnRemove(self)
-        ent.OccupiedEntity = self
+        self:SetParent(ent)
     end)
 
 function ENT:SetupDataTables()

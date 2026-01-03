@@ -34,8 +34,7 @@ ENT.Deploy = gRust.CreateDeployable()
             :AddMaleTag("doubledoor")
     )
     :SetOnDeployed(function(self, pl, ent)
-        ent:DeleteOnRemove(self)
-        ent.OccupiedEntity = self
+        self:SetParent(ent)
     end)
 
 function ENT:OnInventoryAttached(inv)
