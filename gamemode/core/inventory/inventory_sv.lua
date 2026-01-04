@@ -65,8 +65,9 @@ net.Receive("gRust.DropItem", function(len, pl)
 
     local pos = pl:EyePos() + pl:GetAimVector() * 32
     local ang = pl:EyeAngles()
-
-    local item = quantity == inventory[index]:GetQuantity() and inventory[index] or inventory[index]:Split(quantity)
+    
+    local fullQuantity = inventory[index]:GetQuantity()
+    local item = quantity == fullQuantity and inventory[index] or inventory[index]:Split(quantity)
 
     local ent = gRust.CreateItemBag(item, pos, ang)
     timer.Simple(0, function()
@@ -76,5 +77,9 @@ net.Receive("gRust.DropItem", function(len, pl)
         end
     end)
     
-    inventory:Remove(index, quantity)
+    if (quantity == fullQuantity) then
+        inventory:Remove(index)
+    else
+        inventory:SyncSlot(index)
+    end
 end)

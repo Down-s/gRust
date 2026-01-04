@@ -110,6 +110,9 @@ hook.Add("PostRenderVGUI", "gRust.TeamUI", function()
     surface.SetFont("gRust.32px")
     local tw, th = surface.GetTextSize("✓")
 
+    local colWidth = 0
+    local x = margin * 1.4
+    local y = ScrH() - margin
     for k, v in ipairs(team.Members) do
         local color = OFFLINE_COLOR
         local pl = teamPlayerCache[v.SteamID64]
@@ -123,7 +126,18 @@ hook.Add("PostRenderVGUI", "gRust.TeamUI", function()
         end
 
         local icon = v.IsLeader and "✓" or "•"
-        draw.SimpleTextOutlined(string.format("%s %s", icon, v.Name), "gRust.32px", margin * 1.4, ScrH() - margin - th * (k - 1), color, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, math.ceil(2 * gRust.Hud.Scaling), color_black)
+        draw.SimpleTextOutlined(string.format("%s %s", icon, v.Name), "gRust.32px", x, y, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_BOTTOM, math.ceil(2 * gRust.Hud.Scaling), color_black)
+        y = y - th
+
+        local nameWidth, _ = surface.GetTextSize(v.Name)
+        colWidth = math.max(colWidth, nameWidth)
+
+        if (k % 4 == 0) then
+            x = x + colWidth + tw + margin
+            y = ScrH() - margin
+
+            colWidth = 0
+        end
     end
 end)
 
