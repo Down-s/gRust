@@ -40,7 +40,7 @@ gRust.ItemRegister("salvaged_sword")
 :SetTier(1)
 :Register()
 
-gRust.ItemRegister("bone_club")
+--[[gRust.ItemRegister("bone_club")
 :SetName("Bone Club")
 :SetDescription("The Bone Club is a cheap, simple to craft melee weapon of the early game. Despite its shortcomings, the Bone Club serves as an upgrade to the Rock, being better at both harvesting resources and fighting.")
 :SetIcon("materials/items/weapons/bone_club.png")
@@ -56,7 +56,7 @@ gRust.ItemRegister("bone_club")
 :SetCraftable(true)
 :SetCraftAmount(1)
 :SetCraftTime(10)
-:Register()
+:Register()]]--
 
 gRust.ItemRegister("wooden_spear")
 :SetName("Wooden Spear")
