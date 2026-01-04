@@ -80,6 +80,11 @@ hook.Add("Think", "gRust.Deploy", function()
         local ent = gRust.Deploy.Entity
         local deployData = gRust.Deploy.Data
         local item = pl.Belt[gRust.Hotbar.SelectedSlot]
+        if (!IsValid(item)) then
+            gRust.StopDeploy()
+            return
+        end
+        
         local condition = item:GetCondition() or 1
 
         if (!pl:Alive() or !item or condition <= 0) then
