@@ -69,6 +69,20 @@ function SOCKET:GetCustomCheck(...)
     end
 end
 
+function SOCKET:Copy()
+    local copy = gRust.CreateSocket()
+    if (self.pos) then copy:SetPosition(self.pos.x, self.pos.y, self.pos.z) end
+    if (self.ang) then copy:SetAngle(self.ang.p, self.ang.y, self.ang.r) end
+    if (self.angOffset) then copy:SetAngleOffset(self.angOffset.p, self.angOffset.y, self.angOffset.r) end
+
+    for k, v in ipairs(self.MaleTags) do copy:AddMaleTag(v) end
+    for k, v in pairs(self.FemaleTags) do copy:AddFemaleTag(k) end
+
+    if (self.CustomCheck) then copy:SetCustomCheck(self.CustomCheck) end
+
+    return copy
+end
+
 function gRust.CreateSocket()
     local socket = setmetatable({}, SOCKET)
     socket:Init()
