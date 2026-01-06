@@ -38,7 +38,7 @@ ENT.Deploy = gRust.CreateDeployable()
             :AddMaleTag("doubledoor")
     )
     :SetOnDeployed(function(self, pl, ent)
-        ent:DeleteOnRemove(self)
+        self:SetParent(ent)
     end)
     :SetPreviewCallback(function(self, ent)
         if (!ent.LeftDoor) then

@@ -27,8 +27,7 @@ ENT.Deploy = gRust.CreateDeployable()
     )
     -- Workaround as the origin of the window frames is not centered
     :SetOnDeployed(function(self, pl, ent)
-        ent:DeleteOnRemove(self)
-        ent.OccupiedEntity = self
+        self:SetParent(ent)
         self:SetPos(self:GetPos() - Vector(0, 0, 46.5))
     end)
     :SetPreviewCallback(function(self, ent)
