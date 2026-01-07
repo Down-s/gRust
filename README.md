@@ -41,14 +41,14 @@ Simply enter one of the `connect` commands above into your console and you shoul
 
 The best way to play locally is to simply download it on the workshop using the following link:
 > **gRust - Rust in Garry's Mod**  
-> https://steamcommunity.com/sharedfiles/filedetails/?id=TODO
+> https://steamcommunity.com/sharedfiles/filedetails/?id=3636622724
   
 You can also clone this repository into `steamapps/common/GarrysMod/garrysmod/gamemodes/rust` if you want the most up to date version.
 To update, simply run `git pull` in the gamemode's root directory.
   
 It is recommended that you download a map that supports the gRust gamemode for a playable expereince, here is the most popular:
 > **rust_highland**  
-> https://steamcommunity.com/sharedfiles/filedetails/?id=TODO
+> https://steamcommunity.com/sharedfiles/filedetails/?id=3636630095
 
 Once downloaded, simply (re)open Garry's Mod and select the "Rust" gamemode on the bottom right of the main menu,
 click "Start New Game", and select a map from the "Rust" category. If you want to play with friends, change the
