@@ -21,6 +21,7 @@ function ENT:Initialize()
     LeftDoor:SetAngles(self:GetAngles())
     LeftDoor.Model = self.LeftDoorModel
     LeftDoor:Spawn()
+    LeftDoor:SetNWBool("gRust.NoLock", true)
     LeftDoor.RotateAmount = -LeftDoor.RotateAmount
     LeftDoor.OnOpen = function()
         self:EmitSound(self:GetOpenSound())
@@ -36,7 +37,7 @@ function ENT:Initialize()
     LeftDoor.GetShutSound = NullSound
     LeftDoor:SetMaxHP(self.MaxHP)
     LeftDoor:SetHP(self.MaxHP)
-    
+
     local RightDoor = ents.Create("rust_door")
     RightDoor:SetPos(self:LocalToWorld(Vector(self.DoorSpacing, 0, 5)))
     RightDoor:SetAngles(self:GetAngles() + Angle(0, 180, 0))
@@ -69,6 +70,9 @@ function ENT:Initialize()
     RightDoor.OnTakeDamage = OnTakeDamage
 
     RightDoor:SetLinkedDoor(LeftDoor)
+
+    self:DeleteOnRemove(LeftDoor)
+    self:DeleteOnRemove(RightDoor)
 
     LeftDoor:DeleteOnRemove(self)
     RightDoor:DeleteOnRemove(self)
@@ -126,7 +130,7 @@ function ENT:Load(f)
 
     self.LeftDoor.InitialRotation = self:GetAngles().y
     self.RightDoor.InitialRotation = self:GetAngles().y + 180
-    
+
     if (f:ReadBool()) then
         self.RightDoor:AddLock(f:ReadString())
         if (f:ReadBool()) then
