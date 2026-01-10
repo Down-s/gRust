@@ -210,6 +210,7 @@ function ITEM:Copy()
         Quantity = self:GetQuantity(),
         Condition = self:GetCondition(),
         Clip = self:GetClip(),
+        AmmoType = self.AmmoType,
         Inventory = self:GetInventory() and self:GetInventory():Copy(),
     }, ITEM)
 end
@@ -219,6 +220,7 @@ function ITEM:Split(n)
 
     local item = self:Copy()
     item:SetQuantity(n)
+    item.AmmoType = self.AmmoType
     self:SetQuantity(self:GetQuantity() - n)
 
     if (self:GetInventory()) then

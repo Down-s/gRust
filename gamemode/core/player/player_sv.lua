@@ -490,7 +490,7 @@ function PLAYER:AddItem(item, reason)
         end)
     end
 
-    if (reason ~= ITEM_GENERIC) then
+    if (reason != ITEM_GENERIC) then
         net.Start("gRust.AddItemNotify")
             net.WriteItem(baseItem)
         net.Send(self)
