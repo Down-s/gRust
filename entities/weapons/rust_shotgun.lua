@@ -5,7 +5,6 @@ DEFINE_BASECLASS("rust_gun")
 
 --SWEP.ReloadDelay = 1.5 -- time between start of reload and first shell insert
 SWEP.ShellInsertTime = 0.5 -- time between shell inserts
-SWEP.InsertDelay = 0.5
 SWEP.AimCone = 0.15
 SWEP.ClipSize = 8
 SWEP.Bullets = 10
@@ -62,19 +61,16 @@ function SWEP:StartReload()
 end
 
 function SWEP:InsertShell()
+    if (!IsValid(self)) then return end
     if (!self:CanReload()) then return end
 
     local pl = self:GetOwner()
     self:PlayAnimation("InsertShell")
     self:SetNextShell(CurTime() + self:SequenceDuration())
 
-    timer.Simple(self.InsertDelay, function()
-        if (!IsValid(self)) then return end
-
-        local ammoType = self.AmmoTypes[self:GetAmmoType()]
-        self:SetClip(self:Clip1() + 1)
-        pl:RemoveItem(ammoType.Item, 1)
-    end)
+    local ammoType = self.AmmoTypes[self:GetAmmoType()]
+    pl:RemoveItem(ammoType.Item, 1)
+    self:SetClip(self:Clip1() + 1)
 end
 
 function SWEP:Think()
@@ -97,7 +93,6 @@ function SWEP:Think()
     local nextShell = self:GetNextShell()
     if (nextShell != 0 and nextShell <= CurTime()) then
         if (self:CanReload()) then
-            self:SetNextShell(CurTime() + self.ShellInsertTime)
             self:InsertShell()
         else
             self:PlayAnimation("ReloadFinish")
