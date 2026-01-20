@@ -176,6 +176,7 @@ function PANEL:FillCategory(category)
     self:FillItems(function(item)
         return item:IsInCategory(category)
     end)
+    return true
 end
 
 local ITEM_SIZE = 128
