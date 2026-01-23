@@ -1,5 +1,4 @@
 include("shared.lua")
-
 surface.CreateFont("gRust.Furnace.Text", {
     font = "Roboto Condensed",
     size = 28 * gRust.Hud.Scaling,
@@ -9,12 +8,10 @@ surface.CreateFont("gRust.Furnace.Text", {
 
 matproxy.Add({
     name = "RUST_FURNACE_PROXY",
-    init = function(self, mat, values)
-        self.resultVar = values.resultvar
-    end,
+    init = function(self, mat, values) self.resultVar = values.resultvar end,
     bind = function(self, mat, ent)
-        if (IsValid(ent)) then
-            if (ent.GetBurning and ent:GetBurning()) then
+        if IsValid(ent) then
+            if ent.GetBurning and ent:GetBurning() then
                 mat:SetInt("$flags", 64)
             else
                 mat:SetInt("$flags", 0)
@@ -39,17 +36,14 @@ local TOGGLE_ON_TEXT = [[This furnace is on. It will burn fuel until it runs out
 local TOGGLE_OFF_TEXT = [[The furnace is off. To switch it on make sure it has fuel (wood) and press the button on the left.]]
 function ENT:CreateLootingPanel(panel)
     local burning = self:GetBurning()
-
     local ControlPanel = panel:Add("gRust.ControlPanel")
     ControlPanel:Dock(BOTTOM)
     ControlPanel:DockMargin(0, 20 * gRust.Hud.Scaling, 0, 0)
     ControlPanel:SetTall(184 * gRust.Hud.Scaling)
-
     local ToggleButton = ControlPanel:Add("gRust.ToggleButton")
     ToggleButton:Dock(LEFT)
     ToggleButton:SetWide(256 * gRust.Hud.Scaling)
     ToggleButton:SetToggled(burning)
-
     local Info = ControlPanel:Add("gRust.Label")
     Info:Dock(FILL)
     Info:SetWrap(true)
@@ -63,9 +57,10 @@ function ENT:CreateLootingPanel(panel)
         net.WriteEntity(self)
         net.SendToServer()
     end
+
     ToggleButton.Think = function(me)
         local toggled = self:GetBurning()
-        if (toggled) then
+        if toggled then
             Info:SetText(TOGGLE_ON_TEXT)
             ToggleButton:SetToggled(true)
         else

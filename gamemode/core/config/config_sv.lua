@@ -1,4 +1,4 @@
-local CONFIG_DIR = "grust/config/"
+local CONFIG_DIR = "rust/config/"
 
 file.CreateDir(CONFIG_DIR)
 

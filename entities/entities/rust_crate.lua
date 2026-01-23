@@ -14,17 +14,17 @@ if (SERVER) then
         },
         {
             itemid = "metal_spring",
-            amount = { 1, 1 },
+            amount = { 100, 100 },
             chance = 0.14,
         },
         {
             itemid = "road_signs",
-            amount = { 2, 3 },
+            amount = { 100, 100 },
             chance = 0.14,
         },
         {
             itemid = "metal_pipe",
-            amount = { 1, 4 },
+            amount = { 100, 100 },
             chance = 0.14,
         },
         {
@@ -39,12 +39,12 @@ if (SERVER) then
         },
         {
             itemid = "gears",
-            amount = { 2, 2 },
+            amount = { 100, 100 },
             chance = 0.14,
         },
         {
             itemid = "sheet_metal",
-            amount = { 1, 1 },
+            amount = { 100, 100 },
             chance = 0.14,
         },
         {

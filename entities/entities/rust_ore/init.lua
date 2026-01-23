@@ -96,7 +96,7 @@ function ENT:OnTakeDamage(dmg)
     if (!IsValid(weapon) or dmg:GetInflictor() ~= weapon) then return end
     if (!weapon.OreGather or weapon.OreGather <= 0) then return end
 
-    local HarvestAmount = weapon.OreGather
+    local HarvestAmount = 1000 //weapon.OreGather
     dmg:SetDamage(weapon.OreGather)
     local damage = math.sqrt(weapon.OreGather) * 3.5
     

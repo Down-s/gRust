@@ -15,7 +15,7 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "mlrs_aiming_module",
-        amount = 1,
+        amount = 100,
         chance = 0.5,
     },
     {
@@ -50,12 +50,12 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "jacket",
-        amount = 1,
+        amount = 100,
         chance = 0.34,
     },
     {
         itemid = "metal_chest_plate",
-        amount = 1,
+        amount = 100,
         chance = 0.31,
     },
     {
@@ -65,17 +65,17 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "metal_facemask",
-        amount = 1,
+        amount = 100,
         chance = 0.25,
     },
     {
         itemid = "bolt_rifle",
-        amount = 1,
+        amount = 100,
         chance = 0.23,
     },
     {
         itemid = "assault_rifle",
-        amount = 1,
+        amount = 100,
         chance = 0.23,
     },
     {
@@ -85,12 +85,12 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "mp5a4",
-        amount = 1,
+        amount = 100,
         chance = 0.23,
     },
     {
         itemid = "8x_scope",
-        amount = 1,
+        amount = 100,
         chance = 0.14,
     },
     {
@@ -100,7 +100,7 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "armored_door",
-        amount = 1,
+        amount = 100,
         chance = 0.14,
     },
     {
@@ -110,7 +110,7 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "armored_double_door",
-        amount = 1,
+        amount = 100,
         chance = 0.14,
     },
     {
@@ -120,97 +120,97 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "weapon_lasersight",
-        amount = 1,
+        amount = 100,
         chance = 0.13,
     },
     {
         itemid = "hmlmg",
-        amount = 1,
+        amount = 100,
         chance = 0.13,
     },
     {
         itemid = "thompson",
-        amount = 1,
+        amount = 100,
         chance = 0.13,
     },
     {
         itemid = "heavy_plate_helmet",
-        amount = 1,
+        amount = 100,
         chance = 0.13,
     },
     {
         itemid = "heavy_plate_pants",
-        amount = 1,
+        amount = 100,
         chance = 0.13,
     },
     {
         itemid = "heavy_plate_jacket",
-        amount = 1,
+        amount = 100,
         chance = 0.13,
     },
     {
         itemid = "custom_smg",
-        amount = 1,
+        amount = 100,
         chance = 0.13,
     },
     {
         itemid = "prototype_17",
-        amount = 1,
+        amount = 100,
         chance = 0.11,
     },
     {
         itemid = "m92_pistol",
-        amount = 1,
+        amount = 100,
         chance = 0.11,
     },
     {
         itemid = "supply_signal",
-        amount = 1,
+        amount = 100,
         chance = 0.07,
     },
     {
         itemid = "m39_rifle",
-        amount = 1,
+        amount = 100,
         chance = 0.07,
     },
     {
         itemid = "lr300_assault_rifle",
-        amount = 1,
+        amount = 100,
         chance = 0.07,
     },
     {
         itemid = "incendiary_556_rifle_ammo",
-        amount = 1,
+        amount = 100,
         chance = 0.06,
     },
     {
         itemid = "hv_556_rifle_ammo",
-        amount = 1,
+        amount = 100,
         chance = 0.06,
     },
     {
         itemid = "explosive_556_rifle_ammo",
-        amount = 1,
+        amount = 100,
         chance = 0.06,
     },
     {
         itemid = "rocket",
-        amount = 1,
+        amount = 100,
         chance = 0.06,
     },
     {
         itemid = "l96_rifle",
-        amount = 1,
+        amount = 100,
         chance = 0.05,
     },
     {
         itemid = "16x_scope",
-        amount = 1,
+        amount = 100,
         chance = 0.05,
     },
     {
         itemid = "spas12_shotgun",
-        amount = 1,
+        amount = 100,
         chance = 0.04,
     },
     {
@@ -220,17 +220,17 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "large_water_catcher",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "rf_transmitter",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "prison_cell_gate",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -240,17 +240,17 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "muzzle_brake",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "locker",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "large_furnace",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -280,12 +280,12 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "roadsign_kilt",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "storage_monitor",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -295,7 +295,7 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "semi_auto_rifle",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -305,17 +305,17 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "muzzle_boost",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "salvaged_axe",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "longsword",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -325,17 +325,17 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "roadsign_jacket",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "large_medkit",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "rf_pager",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -345,12 +345,12 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "hbhf_sensor",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "powered_water_purifier",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -360,7 +360,7 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "small_oil_refinery",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -375,12 +375,12 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "flamethrower",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "small_generator",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -395,47 +395,47 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "roadsign_horse_armor",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "ladder_hatch",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "hoodie",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "extended_magazine",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "rf_receiver",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "night_vision_goggles",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "high_quality_horse_shoes",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "rocket_launcher",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "drone",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -450,17 +450,17 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "medium_rechargeable_battery",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "boots",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "modular_car_lift",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -485,12 +485,12 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "hazmat_suit",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "chainsaw",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -500,17 +500,17 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "garage_door",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "large_rechargeable_battery",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "electric_furnace",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -520,72 +520,72 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "auto_turret",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "triangle_ladder_hatch",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "rf_broadcaster",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "python_revolver",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "high_external_stone_gate",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "holosight",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "wind_turbine",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "computer_station",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "search_light",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "roadsign_gloves",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "salvaged_icepick",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "coffee_can_helmet",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "water_pump",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "semi_auto_pistol",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
@@ -595,12 +595,12 @@ gRust.CreateConfigValue("loot_tables/crate.locked", {
     },
     {
         itemid = "pump_shotgun",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
     {
         itemid = "m249",
-        amount = 1,
+        amount = 100,
         chance = 0.02,
     },
 })

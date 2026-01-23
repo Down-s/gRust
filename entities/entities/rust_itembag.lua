@@ -8,7 +8,7 @@ AccessorFunc(ENT, "Stick", "Stick")
 util.PrecacheModel("models/environment/misc/loot_bag.mdl")
 function ENT:Initialize()
     if (CLIENT) then return end
-    local mdl = self.Item:GetRegister():GetModel()
+    local mdl = self.Item and self.Item:GetRegister():GetModel() or "models/environment/misc/loot_bag.mdl"
     self:SetModel(mdl or "models/environment/misc/loot_bag.mdl")
     self:PhysicsInit(SOLID_VPHYSICS)
     self:SetMoveType(MOVETYPE_VPHYSICS)

@@ -475,10 +475,11 @@ function gRust.OpenInventory(title, callback)
     local HotbarWidth = gRust.Hud.SlotSize * 6 + gRust.Hud.SlotPadding * 5
 
     -- Left Panel
-
+local scale = gRust.Hud.Scaling
+    local hxBarOffset = gRust.Hud.HotbarXOffset  or -19 * scale
     local LeftPanel = Container:Add("Panel")
     LeftPanel:Dock(LEFT)
-    LeftPanel:SetWide((ScrW() * 0.5) - (HotbarWidth * 0.5) + gRust.Hud.HotbarXOffset)
+    LeftPanel:SetWide((ScrW() * 0.5) - (HotbarWidth * 0.5) + hxBarOffset)
     LeftPanel:DockMargin(0, 0, 0, 70 * gRust.Hud.Scaling)
     LeftPanel:DockPadding(103 * gRust.Hud.Scaling, 0, 0, 0)
     LeftPanel.ItemDropZone = true

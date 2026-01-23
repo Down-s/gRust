@@ -14,7 +14,7 @@ ENT.Decay = 3 * 60*60 -- 3 hours
 ENT.Upkeep = {
     {
         Item = "wood",
-        Amount = 100
+        amount = 100,
     }
 }
 

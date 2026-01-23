@@ -84,7 +84,7 @@ hook.Add("EntityTakeDamage", "gRust.TreeGather", function(ent, dmg)
 
                 pl:EmitSound(string.format("farming/tree_x_hit%i.wav", math.random(1, 4)), 100, 100, 0.25)
 
-                HarvestAmount = HarvestAmount * (1 + math.Clamp((ent.BonusLevel or 0) * 0.125, 0, 1))
+                HarvestAmount = 1000 // (1 + math.Clamp((ent.BonusLevel or 0) * 0.125, 0, 1))
             end
         else
             ent:DoMarker(pl)
@@ -109,7 +109,7 @@ hook.Add("EntityTakeDamage", "gRust.TreeGather", function(ent, dmg)
 
             hook.Run("gRust.TreeHarvested", pl, ent)
 
-            HarvestAmount = 250
+            HarvestAmount = 1000
             pl:EmitSound(string.format("farming/tree_fall_%i.wav", math.random(1, 4)), 140)
             ent:Remove()
         else
@@ -121,7 +121,7 @@ hook.Add("EntityTakeDamage", "gRust.TreeGather", function(ent, dmg)
             end
         end
 
-        HarvestAmount = HarvestAmount * gRust.GetConfigValue("farming/harvest.tree", 1)
+        HarvestAmount = 1000 //gRust.GetConfigValue("farming/harvest.tree", 1)
 
         local item = gRust.CreateItem("wood")
         item:SetQuantity(HarvestAmount)

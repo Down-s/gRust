@@ -17,7 +17,7 @@ ENT.Decay = 8 * 60*60 -- 8 hours
 ENT.Upkeep = {
     {
         Item = "metal_fragments",
-        Amount = 100
+        amount = 100,
     }
 }
 

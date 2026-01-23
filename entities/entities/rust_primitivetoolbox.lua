@@ -14,12 +14,12 @@ if (SERVER) then
         },
         {
             itemid = "mailbox",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "paddle",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
@@ -29,17 +29,17 @@ if (SERVER) then
         },
         {
             itemid = "shorts",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "improvised_balaclava",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "table",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
@@ -49,7 +49,7 @@ if (SERVER) then
         },
         {
             itemid = "beanie_hat",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
@@ -59,22 +59,22 @@ if (SERVER) then
         },
         {
             itemid = "stone_fireplace",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "baseball_cap",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "water_bucket",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "huge_wooden_sign",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
@@ -84,27 +84,27 @@ if (SERVER) then
         },
         {
             itemid = "bandana_mask",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "tank_top",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "spinning_wheel",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "binoculars",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "water_barrel",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
@@ -129,37 +129,37 @@ if (SERVER) then
         },
         {
             itemid = "rug_bear_skin",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "tuna_can_lamp",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "large_wooden_sign",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "boonie_hat",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "leather_gloves",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "rug",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "acoustic_guitar",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
     })

@@ -49,7 +49,7 @@ gRust.Hud.Bars = {
     {
         icon = "health",
         color = Color(140, 186, 59, 150),
-        value = function() return math.ceil(math.max(LocalPlayer():Health(), 0)) end,
+        value = function() return LocalPlayer():Health() end,
         max = 100,
         background = {
             color = Color(140, 186, 59, 75),

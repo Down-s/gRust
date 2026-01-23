@@ -157,7 +157,7 @@ function ENT:Think()
             for i = 1, #entUpkeep do
                 local data = entUpkeep[i]
                 local item = data.Item
-                local amount = data.Amount
+                local amount = data.Amount or 0
 
                 self:AddUpkeepItem(item, (amount / 86400) * THINK_INTERVAL, v)
 

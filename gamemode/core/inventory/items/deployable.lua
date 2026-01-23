@@ -22,7 +22,7 @@ gRust.ItemRegister("wooden_door")
 :SetCondition(true)
 :SetIcon("materials/items/deployable/wooden_door.png")
 :SetMaterial("Wood")
-:AddToCategory("Construction")
+:AddToCategory("Items")
 :SetRecipe(
     "wood", 300
 )
@@ -61,7 +61,6 @@ gRust.ItemRegister("armored_door")
 )
 :SetCraftable(true)
 :SetCraftTime(30)
-:SetResearchCost(500)
 :SetTier(3)
 :Register()
 
@@ -214,7 +213,7 @@ gRust.ItemRegister("armored_double_door")
 :SetCraftable(true)
 :SetCraftTime(30)
 :SetResearchCost(500)
-:SetTier(3)
+:SetTier(2)
 :Register()
 
 gRust.ItemRegister("stone_barricade")
@@ -237,7 +236,7 @@ gRust.ItemRegister("stone_barricade")
 gRust.ItemRegister("wooden_barricade_cover")
 :SetName("Wooden Barricade Cover")
 :SetEntity("rust_woodenbarricade")
-:SetDescription("Perfect for cover when engaging in gun fights. Decays rapidly when placed outside of building privilege.")
+:SetDescription("The Stone Barricade is a deployable building component. It is the cheapest, weakest and smallest of barricades. They are slightly less than the width of a foundation and slightly higher than a crouching player. Due to its low height, barricades are usually placed on higher ground than the opponent. Examples of usage include the top of a hill, roofs and towers. High External Walls take their intended use during combat.")
 :SetStack(1)
 :SetCondition(true)
 :SetIcon("materials/items/deployable/wooden_barricade.png")
@@ -259,7 +258,7 @@ gRust.ItemRegister("repair_bench")
 :SetCondition(true)
 :SetIcon("materials/items/deployable/repair_bench.png")
 :SetMaterial("Wood")
-:AddToCategory("Items")
+:AddToCategory("Construction")
 :SetRecipe(
     "metal_fragments", 125
 )
@@ -276,7 +275,7 @@ gRust.ItemRegister("research_table")
 :SetCondition(true)
 :SetIcon("materials/items/deployable/research_table.png")
 :SetMaterial("Wood")
-:AddToCategory("Items")
+:AddToCategory("Construction")
 :SetRecipe(
     "metal_fragments", 200,
     "scrap", 20
@@ -384,7 +383,7 @@ gRust.ItemRegister("workbench_level_1")
 :SetCondition(true)
 :SetIcon("materials/items/deployable/workbench_tier1.png")
 :SetMaterial("Wood")
-:AddToCategory("Items")
+:AddToCategory("Construction")
 :SetRecipe(
     "wood", 500,
     "metal_fragments", 100,
@@ -402,7 +401,7 @@ gRust.ItemRegister("workbench_level_2")
 :SetCondition(true)
 :SetIcon("materials/items/deployable/workbench_tier2.png")
 :SetMaterial("Metal")
-:AddToCategory("Items")
+:AddToCategory("Construction")
 :SetRecipe(
     "metal_fragments", 500,
     "hq_metal", 2,
@@ -421,7 +420,7 @@ gRust.ItemRegister("workbench_level_3")
 :SetCondition(true)
 :SetIcon("materials/items/deployable/workbench_tier3.png")
 :SetMaterial("Metal")
-:AddToCategory("Items")
+:AddToCategory("Construction")
 :SetRecipe(
     "metal_fragments", 1000,
     "hq_metal", 100,
@@ -447,7 +446,6 @@ gRust.ItemRegister("chair")
 )
 :SetCraftable(true)
 :SetCraftTime(30)
-:SetResearchCost(15)
 :SetTier(1)
 :Register()
 
@@ -477,7 +475,7 @@ gRust.ItemRegister("auto_turret")
 :SetCondition(true)
 :SetIcon("materials/items/deployable/auto_turret.png")
 :SetMaterial("Gun")
-:AddToCategory("Electrical")
+:AddToCategory("Items")
 :SetRecipe(
     "hq_metal", 10,
     "cctv_camera", 1,
@@ -573,6 +571,5 @@ gRust.ItemRegister("garage_door")
 )
 :SetCraftable(true)
 :SetCraftTime(30)
-:SetResearchCost(30)
 :SetTier(2)
 :Register()

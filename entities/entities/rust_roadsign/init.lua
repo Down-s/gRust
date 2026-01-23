@@ -23,13 +23,13 @@ ENT.Models = {
 ENT.Loot = {
     {
         Item = "road_signs",
-        Amount = 1,
+        amount = 100,
         Pos = Vector(0, 0, 96),
         Ang = Angle(0, 0, 0),
     },
     {
         Item = "metal_pipe",
-        Amount = 1,
+        amount = 100,
         Pos = Vector(0, 0, 48),
         Ang = Angle(0, 0, 0),
     }

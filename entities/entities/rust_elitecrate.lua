@@ -14,37 +14,37 @@ if (SERVER) then
         },
         {
             itemid = "hq_metal",
-            amount = { 15, 70 },
+            amount = { 100, 100 },
             chance = 0.28,
         },
         {
             itemid = "tech_trash",
-            amount = { 2, 9 },
+            amount = { 100, 100 },
             chance = 0.28,
         },
         {
             itemid = "smg_body",
-            amount = { 1, 3 },
+            amount = { 100,100},
             chance = 0.28,
         },
         {
             itemid = "rifle_body",
-            amount = { 1, 3 },
+            amount = {100,100 },
             chance = 0.28,
         },
         {
             itemid = "metal_pipe",
-            amount = { 5, 15 },
+            amount = { 100, 100 },
             chance = 0.28,
         },
         {
             itemid = "targeting_computer",
-            amount = { 1, 3 },
+            amount = { 100, 100 },
             chance = 0.16,
         },
         {
             itemid = "cctv_camera",
-            amount = { 1, 3 },
+            amount = { 100, 100 },
             chance = 0.13,
         },
         {

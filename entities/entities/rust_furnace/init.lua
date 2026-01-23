@@ -29,6 +29,7 @@ function ENT:FurnaceThink()
     self.LastCooked = self.LastCooked or {}
     
     local inventory = self.Containers[1]
+    local outputInventory = self.Containers[2]
     local shouldStop = true
     for i = 1, inventory:GetSlots() do
         local item = inventory[i]
@@ -47,7 +48,7 @@ function ENT:FurnaceThink()
                 end
                 
                 local newItem = gRust.CreateItem(cookable[1])
-                local rem = inventory:InsertItem(newItem)
+                local rem = outputInventory:InsertItem(newItem)
                 if (rem) then
                     self:TurnOff()
 

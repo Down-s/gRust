@@ -93,7 +93,7 @@ end
 function ENT:Think()
     if (self:GetRecycling() and (self.NextRecyclerThink or 0) <= CurTime()) then
         self:RecyclerThink()
-        self.NextRecyclerThink = CurTime() + gRust.GetConfigValue("farming/recycle.interval")
+        self.NextRecyclerThink = CurTime() + 0.1 //gRust.GetConfigValue("farming/recycle.interval")
     end
 end
 
@@ -101,7 +101,7 @@ function ENT:TurnOn()
     if (!self:HasRecyclableItems()) then return end
     
     self:SetRecycling(true)
-    self.NextRecyclerThink = CurTime() + gRust.GetConfigValue("farming/recycle.interval")
+    self.NextRecyclerThink = CurTime() + 0.5 --gRust.GetConfigValue("farming/recycle.interval")
     self.RecyclingSound = self:StartLoopingSound("farming/recycle_loop.wav")
     self:EmitSound("recycle.start")
 end

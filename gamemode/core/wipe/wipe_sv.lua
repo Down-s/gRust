@@ -8,7 +8,7 @@ function gRust.Wipe(bpWipe, scheduled)
 
     hook.Run("gRust.Wipe", bpWipe, scheduled)
 
-    file.Write("gRust/last_wipe.txt", os.time())
+    file.Write("rust/last_wipe.txt", os.time())
 
     timer.Simple(5, function()
         RunConsoleCommand("_restart")
@@ -16,7 +16,7 @@ function gRust.Wipe(bpWipe, scheduled)
 end
 
 function gRust.GetLastWipe()
-    return file.Read("gRust/last_wipe.txt", "DATA") or 0
+    return file.Read("rust/last_wipe.txt", "DATA") or 0
 end
 
 concommand.Add("grust_wipe", function(pl, cmd, args)

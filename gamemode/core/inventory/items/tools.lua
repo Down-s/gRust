@@ -80,6 +80,7 @@ gRust.ItemRegister("hammer")
 :SetWeapon("rust_hammer")
 :SetModel("models/weapons/darky_m/rust/w_hammer.mdl")
 :SetMaterial("Wood")
+:AddToCategory("Construction")
 :AddToCategory("Tools")
 :SetRecipe(
     "wood", 100

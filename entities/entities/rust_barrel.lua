@@ -3,7 +3,7 @@ AddCSLuaFile()
 ENT.Base = "rust_base"
 DEFINE_BASECLASS("rust_base")
 
-ENT.SelectAmount = 2
+ENT.SelectAmount = 3
 
 ENT.BulletDamageScale = 1.0
 ENT.MeleeDamageScale = 1.25

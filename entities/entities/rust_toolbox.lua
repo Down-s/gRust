@@ -16,12 +16,12 @@ if (SERVER) then
         },
         {
             itemid = "hatchet",
-            amount = 1,
+            amount = 100,
             chance = 0.08,
         },
         {
             itemid = "pickaxe",
-            amount = 1,
+            amount = 100,
             chance = 0.08,
         },
         {
@@ -31,37 +31,37 @@ if (SERVER) then
         },
         {
             itemid = "salvaged_cleaver",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "hunting_bow",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "salvaged_sword",
-            amount = 1,
+            amount = 100,
             chance = 0.05,
         },
         {
             itemid = "targeting_computer",
-            amount = 1,
+            amount = 100,
             chance = 0.03,
         },
         {
             itemid = "cctv_camera",
-            amount = 1,
+            amount = 100,
             chance = 0.03,
         },
         {
             itemid = "crossbow",
-            amount = 1,
+            amount = 100,
             chance = 0.03,
         },
         {
             itemid = "combat_knife",
-            amount = 1,
+            amount = 100,
             chance = 0.02,
         },
         {

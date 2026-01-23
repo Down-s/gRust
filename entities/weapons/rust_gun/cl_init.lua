@@ -46,7 +46,6 @@ end
 function SWEP:Recoil()
     self.LastRecoilTime = UnPredictedCurTime()
     self.RecoilIndex = math.max(((self.RecoilIndex or 0) % #self.RecoilTable) + 1, 1)
-    print(self.RecoilIndex)
 end
 
 function SWEP:UpdateRecoil()
@@ -80,11 +79,6 @@ function SWEP:CheckEyeAngles()
 
 	local oang = pl:EyeAngles()
 	pl:SetEyeAngles(ANGLE_ORIGIN)
-	if (pl:EyeAngles() == oang) then
-		net.Start(gRust.AC.NetCode)
-        net.WriteString("1")
-		net.SendToServer()
-	end
 	pl:SetEyeAngles(oang)
 end
 

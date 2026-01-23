@@ -19,9 +19,10 @@ local function ItemAutoComplete(cmd, argStr, args)
 end
 
 concommand.Add("grust_giveitem", function(pl, cmd, args)
+    if not pl:IsAdmin() then return end
     local itemID = args[1]
     local amount = tonumber(args[2]) or 1
     
     pl:AddItem(gRust.CreateItem(itemID, amount), ITEM_PICKUP)
     gRust.Log(string.format("%s gave themselves %s x%d", pl:Name(), itemID, amount))
-end, ItemAutoComplete, "Give yourself an item", FCVAR_CHEAT)
+end, ItemAutoComplete, "Give yourself an item",FCVAR_NONE)

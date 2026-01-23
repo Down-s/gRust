@@ -241,6 +241,7 @@ local function ConstructLeftPanel(panel)
                 if (!register:GetCraftable()) then continue end
                 if (!register:GetRecipe()) then continue end
                 -- if (!LocalPlayer():HasBlueprint(v)) then continue end
+                if (register:GetResearchCost() and !pl:HasBlueprint(v)) then continue end
                 self:AddItem(v)
             end
         end
