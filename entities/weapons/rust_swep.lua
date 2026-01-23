@@ -74,7 +74,7 @@ function SWEP:LoseCondition(loss)
         item:SetCondition(0)
         return
     end
-    print(condition,loss,condition - loss)
+
     item:SetCondition(condition - loss)
 end
 
