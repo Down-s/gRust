@@ -30,7 +30,7 @@ local function ConstructLeftPanel(panel)
     end
 
     local pl = LocalPlayer()
-    
+
     local function UpdateCraftingQueue()
         if (!pl.CraftQueue) then return end
 
@@ -58,20 +58,20 @@ local function ConstructLeftPanel(panel)
 
                 if (i == 1) then
                     -- Time left
-    
+
                     draw.RoundedBox(8, 4 * gRust.Hud.Scaling, 4 * gRust.Hud.Scaling, 64 * gRust.Hud.Scaling, 28 * gRust.Hud.Scaling, Color(164, 233, 47, 2150))
-                    
+
                     surface.SetDrawColor(44, 62, 4)
                     surface.SetMaterial(gRust.GetIcon("stopwatch"))
                     surface.DrawTexturedRect(8 * gRust.Hud.Scaling, 6 * gRust.Hud.Scaling, 24 * gRust.Hud.Scaling, 24 * gRust.Hud.Scaling)
-    
+
                     local timeLeft = (item.End or CurTime()) - CurTime()
                     local finish = math.ceil(timeLeft)
                     if (finish < 0) then finish = 0 end
-    
+
                     draw.SimpleText(finish .. "s", "gRust.24px", 36 * gRust.Hud.Scaling, 18 * gRust.Hud.Scaling, Color(44, 62, 4), TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
                 end
-    
+
                 -- Craft amount
 
                 if (item.Amount > 1) then
@@ -79,7 +79,7 @@ local function ConstructLeftPanel(panel)
                     local height = 28 * gRust.Hud.Scaling
                     local margin = 4 * gRust.Hud.Scaling
                     draw.RoundedBox(8, w - width - margin, h - height - margin, width, height, Color(247, 236, 226, 255))
-    
+
                     draw.SimpleText("x" .. item.Amount, "gRust.28px", w - margin - width * 0.5, h - margin - height * 0.5, Color(74, 68, 61), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
                 end
 
@@ -99,7 +99,7 @@ local function ConstructLeftPanel(panel)
 
     UpdateCraftingQueue()
     hook.Add("gRust.CraftQueueUpdated", CraftingQueue, UpdateCraftingQueue)
-    
+
     local Container = panel:Add("Panel")
     Container:Dock(FILL)
 
@@ -112,6 +112,19 @@ local function ConstructLeftPanel(panel)
     for i = 1, #itemCategories do
         local cat = itemCategories[i]
         if (!cat.Visible) then continue end
+
+        local learnedCount = 0
+        for _, itemId in ipairs(cat.Items) do
+            local itemData = gRust.GetItemRegister(itemId)
+            if itemData then
+                if !itemData:GetCraftable() then continue end
+                if !itemData:GetRecipe() then continue end
+
+                if !itemData:GetResearchCost() or pl:HasBlueprint(itemId) then
+                    learnedCount = learnedCount + 1
+                end
+            end
+        end
 
         local Category = Categories:Add("gRust.Button")
         Category:Dock(TOP)
@@ -130,7 +143,7 @@ local function ConstructLeftPanel(panel)
         Category.DoClick = function(self)
             gRust.PlaySound("ui.select")
             if (SelectedCategory == cat.Name) then return end
-            
+
             self.ClickTime = CurTime()
             SelectedCategory = cat.Name
 
@@ -158,9 +171,9 @@ local function ConstructLeftPanel(panel)
                         self.bHovered = false
                     end
                 end
-                
+
                 local t = Lerp((CurTime() - self.HoveredTime) / AnimTime, 0, 1)
-            
+
                 self.AnimScale = (gRust.Anim.Punch(t) * AnimIntensity) + 1
 
                 if (SelectedCategory == cat.Name) then
@@ -171,7 +184,7 @@ local function ConstructLeftPanel(panel)
                         gRust.DrawPanelColored(w - (clickProgress * w), 0, (clickProgress * w), h, Color(49, 116, 175, clickProgress * 255))
                     end
                 end
-                
+
                 Category.Matrix:Identity()
                 Category.Matrix:Translate(Vector(x, y))
                 Category.Matrix:SetScale(Vector(1, 1, 1) * self.AnimScale)
@@ -187,7 +200,7 @@ local function ConstructLeftPanel(panel)
             surface.DrawTexturedRect(16 * gRust.Hud.Scaling, 16 * gRust.Hud.Scaling, 32 * gRust.Hud.Scaling, 32 * gRust.Hud.Scaling)
 
             draw.SimpleText(string.upper(cat.Name), "gRust.30px", 64 * gRust.Hud.Scaling, h * 0.5, TextColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
-            draw.SimpleText(#cat.Items, "gRust.30px", w - 16 * gRust.Hud.Scaling, h * 0.5, CountColor, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+            draw.SimpleText(learnedCount, "gRust.30px", w - 16 * gRust.Hud.Scaling, h * 0.5, CountColor, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
 
             cam.PopModelMatrix()
         end
@@ -229,6 +242,7 @@ local function ConstructLeftPanel(panel)
                 local item = gRust.GetItemRegister(v)
                 if (!item:GetCraftable()) then continue end
                 if (!item:GetRecipe()) then continue end
+                if (item:GetResearchCost() and !pl:HasBlueprint(v)) then continue end
 
                 if (string.find(string.lower(item:GetName()), string.lower(SearchString))) then
                     self:AddItem(v)
@@ -241,10 +255,11 @@ local function ConstructLeftPanel(panel)
                 if (!register:GetCraftable()) then continue end
                 if (!register:GetRecipe()) then continue end
                 -- if (!LocalPlayer():HasBlueprint(v)) then continue end
+                if (register:GetResearchCost() and !pl:HasBlueprint(v)) then continue end
                 self:AddItem(v)
             end
         end
-        
+
         Rebuild(self)
     end
     gRust.Crafting.ItemGrid.OnItemSelected = function(self, item)
@@ -264,22 +279,22 @@ surface.CreateFont("gRust.Crafting.Description", {
 local BounceIntensity = 0.075
 local function ConstructRightPanel(panel, dontanimate)
     local Item = gRust.GetItemRegister(SelectedItem)
-    
+
     panel.StartTime = CurTime()
     panel.Matrix = Matrix()
     panel:SetPaintedManually(true)
     hook.Add("PostRenderVGUI", panel, function(self)
         if (!dontanimate) then
             cam.PushModelMatrix(self.Matrix)
-    
+
             local mx, my = self:LocalToScreen(0, 0)
             local mw, mh = self:GetWide(), self:GetTall()
             mx = mx + mw * 0.5
             my = my + mh * 0.5
-    
+
             local t = Lerp((CurTime() - self.StartTime) / 0.15, 0, 1)
             local scale = (1 - BounceIntensity) + (BounceIntensity * math.ease.OutBack(t))
-            
+
             surface.SetAlphaMultiplier(t)
 
             self.Matrix:Translate(Vector(mx, my))
@@ -551,7 +566,7 @@ function gRust.OpenCrafting()
     gRust.Crafting = Root
 
     TabButtons(Root)
-    
+
     local Container = Root:Add("Panel")
     Container:Dock(FILL)
     Container:DockMargin(140 * gRust.Hud.Scaling, 0, 172 * gRust.Hud.Scaling, 232 * gRust.Hud.Scaling)
@@ -564,7 +579,7 @@ function gRust.OpenCrafting()
     LeftPanel:Dock(LEFT)
     LeftPanel:SetWide(1120 * gRust.Hud.Scaling)
     LeftPanel:DockMargin(0, 0, 6 * gRust.Hud.Scaling, 0)
-    
+
     ConstructLeftPanel(LeftPanel)
 
     gRust.Crafting.SelectItem = function(me, item)

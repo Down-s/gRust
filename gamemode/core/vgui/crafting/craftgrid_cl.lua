@@ -8,6 +8,7 @@ AccessorFunc(PANEL, "IconMargin", "IconMargin", FORCE_NUMBER)
 function PANEL:Init()
     self.Items = {}
     self.ItemIndices = {}
+    self.CraftStates = {}
 
     self:SetCols(5)
     self:SetItemMargin(22 * gRust.Hud.Scaling)
@@ -59,18 +60,21 @@ function PANEL:Rebuild()
     if (self.Scrollable) then
         local Scroll = self:Add("gRust.Scroll")
         Scroll:Dock(FILL)
-        
+
         self.Container = Scroll:Add("Panel")
     else
         self.Container = self:Add("Panel")
     end
-    
+
     self.Container:Dock(FILL)
     self.Container:DockPadding(ItemMargin, ItemMargin, ItemMargin, ItemMargin)
 
     local pl = LocalPlayer()
+    if not IsValid(pl) then return end
 
     local items = self.Items
+
+    -- First only craftable
     table.sort(items, function(a, b)
         if (pl:CanCraft(a) and !pl:CanCraft(b)) then
             return true
@@ -82,16 +86,37 @@ function PANEL:Rebuild()
     end)
 
     local row
+    local itemsInRow = 0
+    local lastCanCraft = nil
+
     for i = 1, #items do
         local id = items[i]
         local item = gRust.GetItemRegister(id)
-        
-        if ((i % self:GetCols()) == 1) then
+
+        if (item:GetResearchCost() and !pl:HasBlueprint(id)) then
+            continue
+        end
+
+        local canCraft = pl:CanCraft(id)
+        local bNewRow = false
+
+        if (row == nil) then
+            bNewRow = true
+        elseif (itemsInRow >= self:GetCols()) then
+            bNewRow = true
+        elseif (lastCanCraft ~= nil and lastCanCraft ~= canCraft) then
+            bNewRow = true
+        end
+
+        if (bNewRow) then
             row = self.Container:Add("Panel")
             row:Dock(TOP)
             row:DockMargin(0, 0, 0, ItemMargin)
             row:InvalidateParent(true)
+            itemsInRow = 0
         end
+
+        lastCanCraft = canCraft
 
         local ItemPanel = row:Add("gRust.Button")
         ItemPanel:Dock(LEFT)
@@ -104,12 +129,6 @@ function PANEL:Rebuild()
             surface.SetMaterial(item:GetIcon())
             surface.DrawTexturedRect(IconMargin, IconMargin, w - (IconMargin * 2), h - (IconMargin * 2))
 
-            if (item:GetResearchCost() and !pl:HasBlueprint(id)) then
-                surface.SetDrawColor(ColorAlpha(gRust.Colors.Text, 150))
-                surface.SetMaterial(gRust.GetIcon("lock"))
-                surface.DrawTexturedRect(LOCK_MARGIN, LOCK_MARGIN, w - (LOCK_MARGIN * 2), h - (LOCK_MARGIN * 2))
-            end
-            
             if (me:IsHovered()) then
                 if (me:GetDown()) then
                     surface.SetDrawColor(255, 255, 255, 25)
@@ -121,7 +140,7 @@ function PANEL:Rebuild()
 
             local amountMargin = 24 * gRust.Hud.Scaling
             local amount = gRust.GetCraftingAmount(id)
-            if (amount != 0) then
+            if (amount ~= 0) then
                 local width, height = surface.GetTextSize(amount)
                 width = width + 12 * gRust.Hud.Scaling
                 height = 32 * gRust.Hud.Scaling
@@ -136,19 +155,39 @@ function PANEL:Rebuild()
         ItemPanel.DoDoubleClick = function(me)
             gRust.Craft(id, 1)
         end
-        
-        self.ItemPanels[i] = ItemPanel
+
+        self.ItemPanels[#self.ItemPanels + 1] = ItemPanel
+        itemsInRow = itemsInRow + 1
     end
 
     self:InvalidateLayout(true)
 end
 
 function PANEL:Think()
+    local pl = LocalPlayer()
+    if IsValid(pl) then
+        local stateChanged = false
+        for i = 1, #self.Items do
+            local id = self.Items[i]
+            local canCraft = pl:CanCraft(id)
+
+            if self.CraftStates[id] ~= canCraft then
+                self.CraftStates[id] = canCraft
+                stateChanged = true
+            end
+        end
+
+        if stateChanged then
+            self:SetDirty(true)
+        end
+    end
+
     if (self:GetDirty()) then
         self:Rebuild()
         self:SetDirty(false)
     end
 end
+
 
 function PANEL:PerformLayout(w, h)
     if (!self.ItemPanels) then return end
