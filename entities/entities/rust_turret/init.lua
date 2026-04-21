@@ -90,8 +90,8 @@ function ENT:Think()
         if (IsValid(target)) then
             self:FireAt(target)
         end
-
-        self.NextFire = CurTime() + (60 / self.WeaponData.RPM)
+        local rpm = self.WeaponData.RPM or 1.2
+        self.NextFire = CurTime() + (60 / rpm)
     end
 
     self:NextThink(CurTime())
