@@ -21,32 +21,32 @@ function gRust.SwapInventorySlots(pl, inventory1, index1, inventory2, index2, qu
         pl:ChatPrint(reason)
         return
     end
-    
+
     inventory1:SwapSlot(index1, inventory2, index2, quantity)
 end
 
 net.Receive("gRust.SwapInventorySlots", function(len, pl)
     local invIndex1 = net.ReadUInt(24)
     local invIndex2 = net.ReadUInt(24)
-    
+
     -- TODO: Maybe use ceil(log2(inventory:GetSlots()))
     local index1 = net.ReadUInt(7)
     local index2 = net.ReadUInt(7)
-    
+
     if (invIndex1 == invIndex2 && index1 == index2) then return end
-    
+
     local inventory1 = gRust.Inventories[invIndex1]
     local inventory2 = gRust.Inventories[invIndex2]
     if (!inventory1 || !inventory2) then return end
     if (!inventory1[index1] && !inventory2[index2]) then return end
 
     local register = inventory1[index1]:GetRegister()
-    
+
     local quantity = register.StackBits > 0 and net.ReadUInt(register.StackBits) or 1
     quantity = math.min(quantity, register:GetStack())
-    
+
     if (quantity <= 0) then return end
-    
+
     gRust.SwapInventorySlots(pl, inventory1, index1, inventory2, index2, quantity)
 end)
 
@@ -56,6 +56,7 @@ net.Receive("gRust.DropItem", function(len, pl)
 
     local inventory = gRust.Inventories[invIndex]
     if (!inventory || !inventory:CanPlayerAccess(pl)) then return end
+    if (!inventory[index]) then return end
 
     local register = inventory[index]:GetRegister()
 
@@ -65,7 +66,7 @@ net.Receive("gRust.DropItem", function(len, pl)
 
     local pos = pl:EyePos() + pl:GetAimVector() * 32
     local ang = pl:EyeAngles()
-    
+
     local fullQuantity = inventory[index]:GetQuantity()
     local item = quantity == fullQuantity and inventory[index] or inventory[index]:Split(quantity)
 
@@ -76,7 +77,7 @@ net.Receive("gRust.DropItem", function(len, pl)
             phys:SetVelocity(pl:GetAimVector() * 200)
         end
     end)
-    
+
     if (quantity == fullQuantity) then
         inventory:Remove(index)
     else

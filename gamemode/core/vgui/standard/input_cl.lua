@@ -14,7 +14,7 @@ function PANEL:Init()
     self:SetPlaceholder("Input...")
     self:SetTextColor(gRust.Colors.Text)
     self:SetTextSize(38)
-    
+
     self.TextEntry = self:Add("DTextEntry")
     self.TextEntry:SetFont("gRust." .. self.TextSize .. "px")
     self.TextEntry:SetDrawLanguageID(false)
@@ -26,14 +26,15 @@ function PANEL:Init()
         me:DrawTextEntryText(col, col, col)
 
         if (me:GetValue() == "") then
-            draw.SimpleText(self:GetPlaceholder(), "gRust." .. self.TextSize .. "px", 0, h * 0.5, PlaceholderColor, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
+            draw.SimpleText(self:GetPlaceholder(), "gRust." .. self.TextSize .. "px", 0, h * 0.5, PlaceholderColor,
+                TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
         end
     end
     self.TextEntry.OnCursorEntered = function(me)
         self:ColorTo(HoveredColor, 0.1, 0)
     end
     self.TextEntry.OnCursorExited = function(me)
-        if (!self.Focused) then
+        if (! self.Focused) then
             self:ColorTo(DefaultColor, 0.1, 0)
         end
     end
@@ -45,9 +46,12 @@ function PANEL:Init()
             self:ColorTo(DefaultColor, 0.1, 0)
             self.Focused = false
         end
+        if (!gained) and (me:GetValue() ~= "") then
+            self:UnPopupParent()
+        end
     end
     self.TextEntry.OnMousePressed = function(me)
-        -- self:PopupParent()
+        self:PopupParent()
     end
 
     self.OnCursorEntered = self.TextEntry.OnCursorEntered
@@ -55,7 +59,7 @@ function PANEL:Init()
     self.TextEntry.OnTextChanged = function(me)
         self:OnValueChanged(me:GetValue())
     end
-    
+
     self:SetValue("")
 end
 
@@ -114,10 +118,18 @@ function PANEL:PopupParent()
 end
 
 function PANEL:UnPopupParent()
+    -- Get the 2nd panel from the top (same logic as PopupParent)
     local parent = self:GetParent()
     while (parent:GetParent()) do
-        parent = parent:GetParent()
+        if (IsValid(parent:GetParent():GetParent())) then
+            parent = parent:GetParent()
+        else
+            break
+        end
     end
+
+    parent:SetMouseInputEnabled(false)
+    parent:SetKeyboardInputEnabled(false)
 end
 
 function PANEL:OnValueChanged(value)
